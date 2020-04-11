@@ -3,7 +3,7 @@
 Sell or Advertise anything online with Resale
 
 <h2>Live Demo</h2>
-<code>https://resale.youngtimes24.com</code><br><br>
+[Live Demo](https://resale.youngtimes24.com)
 
 <h2>Requirements</h2>
 <pre>open requirements.txt file to see requirements</pre>
