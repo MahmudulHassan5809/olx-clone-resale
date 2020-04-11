@@ -1,0 +1,50 @@
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>{% block title %}{% endblock title %}</title>
+
+    {% include 'partials/_css.html' %}
+
+    {% block style %}
+
+    {% endblock style %}
+</head>
+
+<body>
+
+
+    {% include 'partials/_header.html' %}
+
+    {% include 'partials/_banner.html' %}
+
+
+
+    <div class="content">
+        {% block cat_search %}
+
+        {% endblock cat_search %}
+        <div class="container">
+            <ol class="breadcrumb" style="margin-bottom: 5px;">
+            {% block breadcrumb %}
+            {% endblock breadcrumb %}
+            </ol>
+            {% block content %}
+
+            {% endblock content %}
+        </div>
+
+    </div>
+
+
+    {% include 'partials/_js.html' %}
+
+    {% include 'partials/_footer.html' %}
+
+    {% block script %}
+
+    {% endblock script %}
+</body>
+</html>

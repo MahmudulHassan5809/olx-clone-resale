@@ -1,0 +1,17 @@
+<div class="header">
+    <div class="container">
+        <div class="logo">
+            <a href="{% url 'products:home' %}"><span>{{setting.name|slice:"0:2"}}</span>{{setting.name|slice:"2:"}}</a>
+        </div>
+        <div class="header-right">
+            {% if user.is_authenticated %}
+                <a class="account" href="{% url 'accounts:dashboard' %}" style="margin-right:5px;">My Account</a>
+                <a class="account" href="{% url 'accounts:logout' %}">Logout</a>
+            {% else %}
+                <a class="account" href="{% url 'accounts:login' %}" style="margin-right:5px;">Login</a>
+                <a class="account" href="{% url 'accounts:register' %}">Register</a>
+            {% endif %}
+
+        </div>
+    </div>
+</div>

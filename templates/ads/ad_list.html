@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {{title}}
+{% endblock title %}
+
+
+{% block cat_search %}
+    {% include 'partials/_categories.html' %}
+    {% include 'partials/_search.html' %}
+{% endblock cat_search %}
+
+{% block breadcrumb %}
+    <li><a href="{% url 'products:home' %}">Home</a></li>
+    <li class="active">{{title}}</li>
+{% endblock breadcrumb %}
+
+{% block content %}
+<div class="ads-grid">
+    <div class="side-bar col-md-3">
+        <!-- <div class="search-hotel">
+            <h3 class="sear-head">Name contains</h3>
+            <form>
+                <input type="text" value="Product name...">
+                <input type="submit" value=" ">
+            </form>
+        </div>
+
+        <div class="range">
+            <h3 class="sear-head">Price range</h3>
+            <ul class="dropdown-menu6">
+                <li>
+
+                    <div id="slider-range"></div>
+                    <input type="text" id="amount" style="border: 0; color: #ffffff; font-weight: normal;" />
+                </li>
+            </ul>
+        </div> -->
+        <!--<div class="featured-ads">
+            <h2 class="sear-head fer">Featured Ads</h2>
+            <div class="featured-ad">
+                <a href="single.html">
+                    <div class="featured-ad-left">
+                        <img src="images/f1.jpg" title="ad image" alt="" />
+                    </div>
+                    <div class="featured-ad-right">
+                        <h4>Lorem Ipsum is simply dummy text of the printing industry</h4>
+                        <p>$ 450</p>
+                    </div>
+                    <div class="clearfix"></div>
+                </a>
+            </div>
+            <div class="featured-ad">
+                <a href="single.html">
+                    <div class="featured-ad-left">
+                        <img src="images/f2.jpg" title="ad image" alt="" />
+                    </div>
+                    <div class="featured-ad-right">
+                        <h4>Lorem Ipsum is simply dummy text of the printing industry</h4>
+                        <p>$ 380</p>
+                    </div>
+                    <div class="clearfix"></div>
+                </a>
+            </div>
+            <div class="featured-ad">
+                <a href="single.html">
+                    <div class="featured-ad-left">
+                        <img src="images/f3.jpg" title="ad image" alt="" />
+                    </div>
+                    <div class="featured-ad-right">
+                        <h4>Lorem Ipsum is simply dummy text of the printing industry</h4>
+                        <p>$ 560</p>
+                    </div>
+                    <div class="clearfix"></div>
+                </a>
+            </div>
+            <div class="clearfix"></div>
+        </div> -->
+        <div class="featured-ads">
+            <h4 class="text-center">All Categories</h4>
+            <ul class="list-group">
+                {% for cat in all_categories %}
+                    <li class="list-group-item">
+                        <a href="{% url 'products:category_product' cat.slug %}">{{cat.name}}</a>
+
+                        <img src="{{cat.image.url}}" width="20px">
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="featured-ads">
+            <div>
+                <h3 class="text-center" style="margin-bottom:5px;">Archive Ads</h3>
+                <div class="panel-group" id="accordion">
+                    {% regroup all_products by created_at.year as year_list %}
+                    {% for year in year_list %}
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="padding:10px 10px;">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#{{year.grouper}}"><span class="glyphicon glyphicon-chevron-down"></span> {{ year.grouper }}</a>
+                            </h4>
+                        </div>
+                        <div id="{{year.grouper}}" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                {% regroup year.list by created_at.month as month_list %}
+                                <ul class="list-group">
+                                {% for month in month_list %}
+                                    <div class="panel panel-success">
+                                        <li class="list-group-item">
+                                            <a href="{% url 'products:archive_month_ads' year.grouper month.grouper %}">
+                                                {{ month.list.0.created_at|date:'b' }} ({{ month.list|length }})
+                                            </a>
+                                        </li>
+                                    </div>
+                                {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+               </div>
+
+            </div>
+        </div>
+        <img src="{% static 'images/ad/2.jpg' %}" alt="">
+    </div>
+    <div class="ads-display col-md-9">
+        <div class="wrapper">
+            <ul  class="nav nav-tabs nav-tabs-responsive" role="tablist">
+                <li role="presentation" class="active">
+                              <a href="javascript:void(0)" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">
+                                <span class="text">{{title}}</span>
+                              </a>
+                            </li>
+            </ul>
+            <div>
+                <div id="container">
+
+                    <div class="sort">
+                        <div class="sort-by">
+                            <label>Sort By : </label>
+                            <select>
+                                <option value="">Most recent</option>
+                                <option value="">Price: Rs Low to High</option>
+                                <option value="">Price: Rs High to Low</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <ul class="list">
+                        {% for ad in ad_list %}
+                            <a href="{% url 'products:ad_detail' ad.slug  %}">
+                                <li>
+                                    {% with ad.product_images.all|first as image %}
+                                        <img src="{{image.image.url}}" height="80px;" title="" alt="" />
+                                    {% endwith %}
+                                    <section class="list-left">
+                                        <h5 class="title">{{ad.title}}</h5>
+                                        <span class="adprice">${{ad.price}}</span>
+                                        <p class="catpath">{{ad.category.name}} » {{ad.brand}}</p>
+                                    </section>
+                                    <section class="list-right">
+                                        <span class="date">{{ad.created_at}}</span>
+                                        <span class="cityname">{{ad.city}}--{{ad.area}}</span>
+                                    </section>
+                                    <div class="clearfix"></div>
+                                </li>
+                                <div class="clearfix"></div>
+                            </a>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+            {% if is_paginated %}
+               {% include 'partials/_pagination.html' %}
+            {% endif %}
+
+    </div>
+<div class="clearfix"></div>
+</div>
+
+
+{% endblock content %}
+
+{% block script %}
+    <script type="text/javascript" src="{% static 'js/jquery-ui.js' %}"></script>
+    <script type='text/javascript'>//<![CDATA[
+    $(window).load(function(){
+     $( "#slider-range" ).slider({
+                range: true,
+                min: 0,
+                max: 9000,
+                values: [ 50, 6000 ],
+                slide: function( event, ui ) {  $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+                }
+     });
+    $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) + " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+
+    });//]]>
+
+    </script>
+{% endblock script %}

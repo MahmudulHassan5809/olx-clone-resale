@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+    {{title}}
+{% endblock title %}
+
+
+{% block cat_search %}
+    {% include 'partials/_categories.html' %}
+    {% include 'partials/_search.html' %}
+{% endblock cat_search %}
+
+
+{% block breadcrumb %}
+    <li><a href="{% url 'products:home' %}">Home</a></li>
+    <li><a href="{% url 'products:category_product' product.category.slug %}">{{product.category.name}}</a></li>
+    <li>{{product.title}}</li>
+{% endblock breadcrumb %}
+
+{% block content %}
+<div class="single-page main-grid-border">
+    <div class="product-desc">
+        <div class="col-md-7 product-view">
+            <h2>{{product.title}}</h2>
+            <p> <i class="glyphicon glyphicon-map-marker"></i><a href="javascript:void()">{{product.city}}</a>, <a href="javascript:void()">{{product.area}}</a>| Added at {{product.created_at}}</p>
+            <div class="flexslider">
+                <ul class="slides">
+                   {% for image in product.product_images.all %}
+                        <li data-thumb="{{image.image.url}}">
+                            <img src="{{image.image.url}}" />
+                        </li>
+                    {% endfor %}
+
+
+                </ul>
+            </div>
+
+            <div class="product-details">
+                <h4>Brand : <a href="javascript:void(0)">{{product.brand}}</a></h4>
+                <h4>Owner : <a href="{% url 'products:user_product' product.owner.username  %}">{{product.owner.username}}</a></h4>
+                <p><strong>Summary</strong> : {{product.description}}</p>
+
+            </div>
+        </div>
+        <div class="col-md-5 product-details-grid">
+            <div class="item-price">
+                <div class="product-price">
+                    <p class="p-price">Price</p>
+                    <h3 class="rate">$ {{product.price}}</h3>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="condition">
+                    <p class="p-price">Condition</p>
+                    <h4>{{product.get_condition_display}}</h4>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="itemtype">
+                    <p class="p-price">Item Type</p>
+                    <h4>{{product.category.name}}</h4>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="interested text-center">
+                <h4>Interested in this Ad?<small> Contact the Seller!</small></h4>
+                <p><i class="glyphicon glyphicon-earphone"></i>{{product.owner.user_profile.phone_number}}</p>
+            </div>
+                <div class="tips">
+                <h4>Safety Tips for Buyers</h4>
+                    <ol>
+                        <li><a href="javascript:void(0)">Contrary to popular belief.</a></li>
+                        <li><a href="javascript:void(0)">Contrary to popular belief.</a></li>
+                        <li><a href="javascript:void(0)">Contrary to popular belief.</a></li>
+                        <li><a href="javascript:void(0)">Contrary to popular belief.</a></li>
+                        <li><a href="javascript:void(0)">Contrary to popular belief.</a></li>
+                        <li><a href="javascript:void(0)">Contrary to popular belief.</a></li>
+                        <li><a href="javascript:void(0)">Contrary to popular belief.</a></li>
+                        <li><a href="javascript:void(0)">Contrary to popular belief.</a></li>
+                        <li><a href="javascript:void(0)">Contrary to popular belief.</a></li>
+                    </ol>
+                </div>
+        </div>
+
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h3>Realted Products</h3>
+        </div>
+        <hr>
+        {% for ad in related_products %}
+           <div class="col-md-4">
+               <div class="thumbnail">
+                    {% with ad.product_images.all|first as image %}
+                        <img src="{{image.image.url}}" class="img-thmbnail" />
+                    {% endwith %}
+                    <div class="caption">
+                        <h3>{{ad.title}}</h3>
+                        <p>{{ ad.description|truncatechars:20 }}</p>
+                        <p>
+                            <a target="_blank" href="{% url 'products:ad_detail' ad.slug  %}" class="btn btn-info btn-md">View</a>
+                        </p>
+                    </div>
+                </div>
+           </div>
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock content %}
+
+
+{% block script %}
+    <!-- FlexSlider -->
+          <script defer src="{% static 'js/jquery.flexslider.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'css/flexslider.css' %}" type="text/css" media="screen" />
+
+            <script>
+        // Can also be used with $(document).ready()
+        $(window).load(function() {
+          $('.flexslider').flexslider({
+            animation: "slide",
+            controlNav: "thumbnails"
+          });
+        });
+        </script>
+        <!-- //FlexSlider -->
+{% endblock script %}

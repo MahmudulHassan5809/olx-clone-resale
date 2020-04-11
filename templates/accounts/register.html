@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+    {{title}}
+{% endblock title %}
+
+{% block breadcrumb %}
+    <li><a href="{% url 'products:home' %}">Home</a></li>
+    <li class="active">Register</li>
+{% endblock breadcrumb %}
+
+
+{% block content %}
+    <div id="page-wrapper" class="sign-in-wrapper">
+                <div class="graphs">
+                    <div class="sign-up">
+                        {% include 'partials/_alert.html' %}
+                        <h1>Create an account</h1>
+                        <p class="creating">Having hands on experience in creating innovative designs,I do offer design
+                            solutions which harness.</p>
+                        <h2>Personal Information</h2>
+                        <form action="{% url 'accounts:register' %}" method="POST" novalidate>
+                            {% csrf_token %}
+                            <div class="sign-u">
+                            <div class="sign-up1">
+                                <h4>{{signup_form.username.label}}* :</h4>
+                            </div>
+                            <div class="sign-up2">
+
+                                {{signup_form.username}}
+                                <span style="color:red">{{signup_form.username.errors.as_text}}</span>
+
+                            </div>
+                            <div class="clearfix"> </div>
+                            </div>
+                            <div class="sign-u">
+                                <div class="sign-up1">
+                                    <h4>{{signup_form.first_name.label}}* :</h4>
+                                </div>
+                                <div class="sign-up2">
+
+                                    {{signup_form.first_name}}
+                                    <span style="color:red">{{signup_form.first_name.errors.as_text}}</span>
+
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                            <div class="sign-u">
+                                <div class="sign-up1">
+                                    <h4>{{signup_form.last_name.label}}* :</h4>
+                                </div>
+                                <div class="sign-up2">
+
+                                    {{signup_form.last_name}}
+                                    <span style="color:red">{{signup_form.last_name.errors.as_text}}</span>
+
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+
+                            <div class="sign-u">
+                                <div class="sign-up1">
+                                    <h4>{{signup_form.email.label}}* :</h4>
+                                </div>
+                                <div class="sign-up2">
+
+                                    {{signup_form.email}}
+                                    <span style="color:red">{{signup_form.email.errors.as_text}}</span>
+
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                            <div class="sign-u">
+                                <div class="sign-up1">
+                                    <h4>{{signup_form.phone_number.label}}* :</h4>
+                                </div>
+                                <div class="sign-up2">
+
+                                    {{signup_form.phone_number}}
+                                    <span style="color:red">{{signup_form.phone_number.errors.as_text}}</span>
+
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                            <div class="sign-u">
+                                <div class="sign-up1">
+                                    <h4>{{signup_form.city.label}}* :</h4>
+                                </div>
+                                <div class="sign-up2">
+
+                                    {{signup_form.city}}
+                                    <span style="color:red">{{signup_form.city.errors.as_text}}</span>
+
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                             <div class="sign-u">
+                                <div class="sign-up1">
+                                    <h4>{{signup_form.password1.label}}* :</h4>
+                                </div>
+                                <div class="sign-up2">
+
+                                    {{signup_form.password1}}
+                                    <span style="color:red">{{signup_form.password1.errors.as_text}}</span>
+
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                            <div class="sign-u">
+                                <div class="sign-up1">
+                                    <h4>{{signup_form.password2.label}}* :</h4>
+                                </div>
+                                <div class="sign-up2">
+
+                                    {{signup_form.password2}}
+                                    <span style="color:red">{{signup_form.password2.errors.as_text}}</span>
+
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                            <div class="sub_home">
+                                <div class="sub_home_left">
+
+                                    <input type="submit" value="Register">
+
+                                </div>
+                                <div class="sub_home_right">
+                                    <p>Login <a href="{% url 'accounts:login' %}">Login</a></p>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+{% endblock content %}

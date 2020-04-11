@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+    {{title}}
+{% endblock title %}
+
+{% block breadcrumb %}
+    <li><a href="{% url 'products:home' %}">Home</a></li>
+    <li class="active">Post Ad</li>
+{% endblock breadcrumb %}
+
+
+{% block content %}
+<div class="submit-ad main-grid-border">
+    {% include 'partials/_alert.html' %}
+    <h2 class="head">Post an Ad</h2>
+    <div class="post-ad-form">
+        <form action="{% url 'products:post_ad' %}" method="POST" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+
+            <span class="errors" style="color:red;font-weight:blod">
+                {{ad_post_form.title.errors.as_text}}
+            </span>
+            <label>{{ad_post_form.title.label}}<span>*</span></label>
+            {{ad_post_form.title}}
+
+
+            <div class="clearfix"></div>
+
+            <span class="errors" style="color:red;font-weight:blod">
+                {{ad_post_form.category.errors.as_text}}
+            </span>
+            <label>{{ad_post_form.category.label}} <span>*</span></label>
+            {{ad_post_form.category}}
+            <div class="clearfix"></div>
+
+            <span class="errors" style="color:red;font-weight:blod">
+                {{ad_post_form.condition.errors.as_text}}
+            </span>
+            <label>{{ad_post_form.condition.label}} <span>*</span></label>
+            {{ad_post_form.condition}}
+            <div class="clearfix"></div>
+
+
+            <span class="errors" style="color:red;font-weight:blod">
+                {{ad_post_form.brand.errors.as_text}}
+            </span>
+            <label>{{ad_post_form.brand.label}} <span>*</span></label>
+            {{ad_post_form.brand}}
+            <div class="clearfix"></div>
+
+            <span class="errors" style="color:red;font-weight:blod">
+                {{ad_post_form.price.errors.as_text}}
+            </span>
+            <label>{{ad_post_form.price.label}} <span>*</span></label>
+            {{ad_post_form.price}}
+            <div class="clearfix"></div>
+
+            <span class="errors" style="color:red;font-weight:blod">
+                {{ad_post_form.description.errors.as_text}}
+            </span>
+           <label>{{ad_post_form.description.label}} <span>*</span></label>
+            {{ad_post_form.description}}
+            <div class="clearfix"></div>
+
+            <span class="errors" style="color:red;font-weight:blod">
+                {{ad_post_form.city.errors.as_text}}
+            </span>
+            <label>{{ad_post_form.city.label}} <span>*</span></label>
+            {{ad_post_form.city}}
+            <div class="clearfix"></div>
+
+            <span class="errors" style="color:red;font-weight:blod">
+                {{ad_post_form.area.errors.as_text}}
+            </span>
+            <label>{{ad_post_form.area.label}} <span>*</span></label>
+            {{ad_post_form.area}}
+            <div class="clearfix"></div>
+
+
+            <div class="upload-ad-photos">
+                <span class="errors" style="color:red;font-weight:blod">
+                    {{ad_post_form.images.errors.as_text}}
+                </span>
+                <label>{{ad_post_form.images.label}} <span>*</span></label>
+                <div class="photos-upload-view">
+                    {{ad_post_form.images}}
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <br><br>
+
+            <p class="post-terms">By clicking <strong>post Button</strong> you accept our <a href="terms.html" target="_blank">Terms of Use </a> and <a href="privacy.html" target="_blank">Privacy Policy</a></p>
+                    <input type="submit" value="Post">
+                    <div class="clearfix"></div>
+
+
+
+        </form>
+
+    </div>
+</div>
+{% endblock content %}
+
+
+{% block script %}
+    <script src="{% static 'js/filedrag.js' %}"></script>
+{% endblock script %}
+

@@ -1,0 +1,70 @@
+<footer>
+            <div class="footer-top">
+                <div class="container">
+                    <div class="foo-grids">
+                        <div class="col-md-3 footer-grid">
+                            <h4 class="footer-head">Who We Are</h4>
+                            <p>{{setting.sologan}}</p>
+                        </div>
+                        <div class="col-md-3 footer-grid">
+                            <h4 class="footer-head">Help</h4>
+                            <ul>
+                                <li><a target="_blank" href="{% url 'pages:how_it_works' %}">How it Works</a></li>
+                               <li><a target="_blank" href="{% url 'pages:faq' %}">Faq</a></li>
+                                <li><a target="_blank" href="{% url 'pages:feedback' %}">Feedback</a></li>
+                                <li><a target="_blank" href="{% url 'pages:contact' %}">Contact</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 footer-grid">
+                            <h4 class="footer-head">Information</h4>
+                            <ul>
+                                <li><a href="{% url 'pages:terms' %}">Terms of Use</a></li>
+                                <li><a href="{% url 'pages:privacy' %}">Privacy Policy</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 footer-grid">
+                            <h4 class="footer-head">Contact Us</h4>
+                            <span class="hq">Our headquarters</span>
+                            <address>
+                                <ul class="location">
+                                    <li><span class="glyphicon glyphicon-map-marker"></span></li>
+                                    <li>{{setting.location}}</li>
+                                    <div class="clearfix"></div>
+                                </ul>
+                                <ul class="location">
+                                    <li><span class="glyphicon glyphicon-earphone"></span></li>
+                                    <li>{{setting.phone_number}}</li>
+                                    <div class="clearfix"></div>
+                                </ul>
+                                <ul class="location">
+                                    <li><span class="glyphicon glyphicon-envelope"></span></li>
+                                    <li><a href="{setting.email}}">{{setting.email}}</a></li>
+                                    <div class="clearfix"></div>
+                                </ul>
+                            </address>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom text-center">
+            <div class="container">
+                <div class="footer-logo">
+                    <a href="{% url 'products:home' %}"><span>{{setting.name|slice:"0:2"}}</span>{{setting.name|slice:"2:"}}</a>
+                </div>
+                <div class="footer-social-icons">
+                    <ul>
+                        <li><a target="_blank" class="facebook" href="{{setting.facebbok_url}}"><span>Facebook</span></a></li>
+                        <li><a target="_blank" class="twitter" href="{{setting.twitter_url}}"><span>Twitter</span></a></li>
+                        <li><a target="_blank" class="flickr" href="{{setting.flickr_url}}"><span>Flickr</span></a></li>
+                        <li><a target="_blank" class="googleplus" href="{{setting.googleplus_url}}"><span>Google+</span></a></li>
+
+                    </ul>
+                </div>
+                <div class="copyrights">
+                    <p> ©  {% now "Y" %} Resale. All Rights Reserved | Design by  <a href="http://github.com/MahmudulHassan5809"> Mahmudul Hassan</a></p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        </footer>

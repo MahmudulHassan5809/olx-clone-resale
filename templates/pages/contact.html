@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% load static %}
+
+{% block title %}
+    {{title}}
+{% endblock title %}
+
+
+{% block breadcrumb %}
+    <li><a href="{% url 'products:home' %}">Home</a></li>
+    <li>{{title}}</li>
+{% endblock breadcrumb %}
+
+
+{% block content %}
+    <div class="contact main-grid-border">
+        <div class="container">
+            {% include 'partials/_alert.html' %}
+            <h2 class="head text-center">Contact Us</h2>
+            <section id="hire">
+                <form id="filldetails" method="POST" action="{% url 'pages:contact' %}" novalidate>
+                    {% csrf_token %}
+                      <div class="field name-box">
+
+                            {{contact_form.name}}
+                            {% if contact_form.name.errors %}
+                                <label for="name">{{contact_form.name.errors.as_text}}</label>
+                            {% else %}
+                                <label for="name">{{contact_form.name.label}}</label>
+                            {% endif %}
+
+
+                            <span class="ss-icon">check</span>
+                      </div>
+
+                      <div class="field email-box">
+                            {{contact_form.email}}
+                            {% if contact_form.email.errors %}
+                                <label for="email">{{contact_form.email.errors.as_text}}</label>
+                            {% else %}
+                                <label for="email">{{contact_form.email.label}}</label>
+                            {% endif %}
+
+                      </div>
+
+                      <div class="field ad-ID">
+                            {{contact_form.ad_url}}
+                            {% if contact_form.ad_url.errors %}
+                                <label for="ad_url">{{contact_form.ad_url.errors.as_text}}</label>
+                            {% else %}
+                                <label for="ad_url">{{contact_form.ad_url.label}}</label>
+                            {% endif %}
+
+                      </div>
+
+                      <div class="field phonenum-box">
+                            {{contact_form.phone_number}}
+                           {% if contact_form.phone_number.errors %}
+                                <label for="phone_number">{{contact_form.phone_number.errors.as_text}}</label>
+                            {% else %}
+                                <label for="phone_number">{{contact_form.phone_number.label}}</label>
+                            {% endif %}
+
+                      </div>
+
+                      <div class="field msg-box">
+                             {{contact_form.message}}
+                            {% if contact_form.message.errors %}
+                                <label for="message">{{contact_form.message.errors.as_text}}</label>
+                            {% else %}
+                                <label for="message">{{contact_form.message.label}}</label>
+                            {% endif %}
+
+                      </div>
+
+                    <div class="clear"></div>
+
+                <input class="button" type="submit" value="Send" />
+            </form>
+</section>
+</div>
+
+</div>
+
+{% endblock content %}
+
+
+{% block script %}
+    <!-- JavaScript Includes -->
+        <script src="{% static 'js/jquery.knob.js' %}"></script>
+
+        <!-- Our main JS file -->
+        <script src="{% static 'js/script.js' %}"></script>
+        <script>
+                  $('textarea').blur(function () {
+                $('#hire textarea').each(function () {
+                    $this = $(this);
+                    if (this.value != '') {
+                        $this.addClass('focused');
+                        $('textarea + label + span').css({ 'opacity': 1 });
+                    } else {
+                        $this.removeClass('focused');
+                        $('textarea + label + span').css({ 'opacity': 0 });
+                    }
+                });
+            });
+            $('#hire .field:first-child input').blur(function () {
+                $('#hire .field:first-child input').each(function () {
+                    $this = $(this);
+                    if (this.value != '') {
+                        $this.addClass('focused');
+                        $('.field:first-child input + label + span').css({ 'opacity': 1 });
+                    } else {
+                        $this.removeClass('focused');
+                        $('.field:first-child input + label + span').css({ 'opacity': 0 });
+                    }
+                });
+            });
+            $('#hire .field:nth-child(2) input').blur(function () {
+                $('#hire .field:nth-child(2) input').each(function () {
+                    $this = $(this);
+                    if (this.value != '') {
+                        $this.addClass('focused');
+                        $('.field:nth-child(2) input + label + span').css({ 'opacity': 1 });
+                    } else {
+                        $this.removeClass('focused');
+                        $('.field:nth-child(2) input + label + span').css({ 'opacity': 0 });
+                    }
+                });
+            });
+            $('#hire .field:nth-child(3) input').blur(function () {
+                $('#hire .field:nth-child(3) input').each(function () {
+                    $this = $(this);
+                    if (this.value != '') {
+                        $this.addClass('focused');
+                        $('.field:nth-child(3) input + label + span').css({ 'opacity': 1 });
+                    } else {
+                        $this.removeClass('focused');
+                        $('.field:nth-child(3) input + label + span').css({ 'opacity': 0 });
+                    }
+                });
+            });
+            $('#hire .field:nth-child(4) input').blur(function () {
+                $('#hire .field:nth-child(4) input').each(function () {
+                    $this = $(this);
+                    if (this.value != '') {
+                        $this.addClass('focused');
+                        $('.field:nth-child(4) input + label + span').css({ 'opacity': 1 });
+                    } else {
+                        $this.removeClass('focused');
+                        $('.field:nth-child(4) input + label + span').css({ 'opacity': 0 });
+                    }
+                });
+            });
+          //@ sourceURL=pen.js
+        </script>
+        <script>
+      if (document.location.search.match(/type=embed/gi)) {
+        window.parent.postMessage("resize", "*");
+      }
+    </script>
+{% endblock script %}

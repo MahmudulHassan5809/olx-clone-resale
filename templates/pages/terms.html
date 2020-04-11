@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% load static %}
+
+{% block title %}
+    {{title}}
+{% endblock title %}
+
+
+{% block breadcrumb %}
+    <li><a href="{% url 'products:home' %}">Home</a></li>
+    <li>{{title}}</li>
+{% endblock breadcrumb %}
+
+
+{% block content %}
+     <div class="terms main-grid-border">
+        <div class="container">
+            <h2 class="head">Terms of Use</h2>
+                <div class="panel-group" id="accordion">
+                <!-- First Panel -->
+                {% for term in all_terms %}
+
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                             <h4 class="panel-title" data-toggle="collapse" data-target="#{{term.id}}">
+                                 <span>{{forloop.counter}}.</span> {{term.name}}
+                             </h4>
+                        </div>
+                        <div id="{{term.id}}" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage.</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                {% endfor %}
+
+                </div>
+        </div>
+    </div>
+{% endblock content %}

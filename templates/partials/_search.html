@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="select-box" style="margin-right: -31px;">
+
+        <form action="{% url 'products:search_product' %}" method="GET">
+            <div class="select-city-for-local-ads ads-list" style="width: 232px;">
+                <label>Select your city to see local ads</label>
+                    <select class="selectpicker show-tick" data-live-search="true" name="city">
+
+
+                           {% for city in all_city %}
+                                <option value="{{city}}">{{city}}</option>
+                            {% endfor %}
+
+
+
+
+                    </select>
+            </div>
+
+            <div class="select-city-for-local-ads ads-list">
+                <label>Select your city to see local ads</label>
+                    <select class="selectpicker show-tick" data-live-search="true" name="area">
+
+                            {% for area in all_area %}
+                                <option value="{{area}}">{{area}}</option>
+                            {% endfor %}
+
+
+
+
+
+                    </select>
+            </div>
+            <div class="browse-category ads-list" >
+                <label>Browse Categories</label>
+                <select class="selectpicker show-tick" data-live-search="true" name="category">
+                    {% for cat in all_categories %}
+                        <option data-tokens="{{cat.name}}" value="{{cat.id}}">{{cat.name}}</option>
+                    {% endfor %}
+
+                </select>
+            </div>
+            <div class="search-product ads-list">
+                <label>Search for a specific product</label>
+                <div class="search">
+                    <div id="custom-search-input">
+                    <div class="input-group">
+                        <input name="search" type="text" class="form-control input-lg" placeholder="Search Product" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-info btn-lg" type="submit">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="clearfix"></div>
+    </div>
+</div>

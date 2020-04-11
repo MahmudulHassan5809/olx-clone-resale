@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {{title}}
+{% endblock title %}
+
+{% block cat_search %}
+    {% include 'partials/_categories.html' %}
+    {% include 'partials/_search.html' %}
+{% endblock cat_search %}
+
+
+{% block breadcrumb %}
+    <li><a href="{% url 'products:home' %}">Home</a></li>
+    <li class="active">{{title}}</li>
+{% endblock breadcrumb %}
+
+{% block content %}
+<div class="ads-grid">
+
+    <div class="ads-display col-md-12">
+        {% include 'partials/_alert.html' %}
+        <div class="wrapper">
+
+            <div class="row">
+
+                {% for ad in search_products %}
+                    <div class="col-sm-6 col-md-4">
+                        <div class="thumbnail">
+                            {% with ad.product_images.all|first as image %}
+                                <img src="{{image.image.url}}" height="80px;" title="" alt="" />
+                            {% endwith %}
+                            <div class="caption">
+                                <h3>{{ad.title}}</h3>
+                                <p>{{ ad.description|truncatechars:20 }}</p>
+                                <p>
+                                    <a target="_blank" href="{% url 'products:ad_detail' ad.slug  %}" class="btn btn-info btn-md" role="button">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+
+                                    <a href="{% url 'products:update_product' ad.slug %}" class="btn btn-success btn-md" role="button">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a class="delete_ad btn btn-md btn-danger"
+                                    data-title="Delete {{ad.title}}?"
+                                    href="{% url 'products:delete_ad' ad.id %}"><i class="fa fa-trash"></i></a>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+<div class="clearfix"></div>
+</div>
+
+
+{% endblock content %}
+
+
+{% block script %}
+    <script type="text/javascript" src="{% static 'js/jquery-ui.js' %}"></script>
+    <script type='text/javascript'>//<![CDATA[
+    $(window).load(function(){
+     $( "#slider-range" ).slider({
+                range: true,
+                min: 0,
+                max: 9000,
+                values: [ 50, 6000 ],
+                slide: function( event, ui ) {  $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+                }
+     });
+    $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) + " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+
+    });//]]>
+
+    </script>
+{% endblock script %}

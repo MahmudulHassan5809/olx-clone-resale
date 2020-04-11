@@ -1,0 +1,23 @@
+<div class="categories">
+                <div class="container">
+                    {% for cat in all_categories %}
+
+
+                    <div class="col-md-2 focus-grid">
+                        <a href="{% url 'products:category_product' cat.slug %}">
+                            <div class="focus-border">
+                                <div class="focus-layout">
+                                    <div class="focus-image">
+                                        <img src="{{cat.image.url}}" height="98px" alt="">
+                                    </div>
+                                    <h4 class="clrchg">{{cat.name}}</h4>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    {% endfor %}
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>

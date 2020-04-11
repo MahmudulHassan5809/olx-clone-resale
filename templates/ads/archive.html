@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% load month_tag %}
+
+{% block title %}
+    {{title}}
+{% endblock title %}
+
+
+{% block cat_search %}
+    {% include 'partials/_categories.html' %}
+    {% include 'partials/_search.html' %}
+{% endblock cat_search %}
+
+
+{% block breadcrumb %}
+    <li><a href="{% url 'products:home' %}">Home</a></li>
+    <li>{{title}}</li>
+    <li>{{year}} --- {{ month|month_name }}</li>
+{% endblock breadcrumb %}
+
+{% block content %}
+
+<div class="ads-grid">
+
+    <div class="ads-display col-md-12">
+        <div class="wrapper">
+            <div class="row">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="text-center">{{year}} --- {{ month|month_name }}</h3>
+                    </div>
+                </div>
+
+                    <ul class="list-group">
+                        {% for ad in object_list %}
+                            <div class="panel panel-success">
+                                <li class="list-group-item">
+                                <a target="_blank" href="{% url 'products:ad_detail' ad.slug  %}">
+                               {{ ad.created_at|date:"F j, Y" }}: {{ ad.title }}
+                                </a>
+                            </li>
+
+                            </div>
+                        {% endfor %}
+                    </ul>
+
+
+                    <ul class="pager">
+                        {% if previous_month %}
+                            <li class="previous"><a href="{% url 'products:archive_month_ads' previous_month|date:'Y' previous_month|date:'m'   %}">Previous</a></li>
+                        {% endif %}
+                        {% if next_month %}
+                            <li class="next">
+                                <a href="{% url 'products:archive_month_ads' next_month|date:'Y'   next_month|date:'m'   %}">Next</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

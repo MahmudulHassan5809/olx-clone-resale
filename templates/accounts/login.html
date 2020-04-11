@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+    {{title}}
+{% endblock title %}
+
+{% block breadcrumb %}
+    <li><a href="{% url 'products:home' %}">Home</a></li>
+    <li class="active">Register</li>
+{% endblock breadcrumb %}
+
+
+{% block content %}
+    <div id="page-wrapper" class="sign-in-wrapper">
+                <div class="graphs">
+                    <div class="sign-up">
+                        {% include 'partials/_alert.html' %}
+                        <h1>Login To Your Account</h1>
+                        <p class="creating">Login To Your Account To Post Ad</p>
+                        <h2>Personal Information</h2>
+                        <form action="{% url 'accounts:login' %}" method="POST" novalidate>
+                            {% csrf_token %}
+                            <div class="sign-u">
+                            <div class="sign-up1">
+                                <h4>{{login_form.username.label}}* :</h4>
+                            </div>
+                            <div class="sign-up2">
+
+
+                                    {{login_form.username}}
+                                    <span style="color:red">{{login_form.username.errors.as_text}}</span>
+
+                            </div>
+                            <div class="clearfix"> </div>
+                            </div>
+                            <div class="sign-u">
+                                <div class="sign-up1">
+                                    <h4>{{login_form.password.label}}* :</h4>
+                                </div>
+                                <div class="sign-up2">
+
+                                        {{login_form.password}}
+                                        <span style="color:red">{{login_form.password.errors.as_text}}</span>
+
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+
+                            <div class="sub_home">
+                                <div class="sub_home_left">
+
+                                        <input type="submit" value="Login">
+
+                                </div>
+                                <div class="sub_home_right">
+                                    <p>Register <a href="{% url 'accounts:register' %}">Register</a></p>
+                                     <p>Register <a href="{% url 'password_reset' %}">Forget Password</a></p>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+{% endblock content %}

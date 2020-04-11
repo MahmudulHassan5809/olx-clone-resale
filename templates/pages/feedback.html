@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% load static %}
+
+{% block title %}
+    {{title}}
+{% endblock title %}
+
+
+{% block breadcrumb %}
+    <li><a href="{% url 'products:home' %}">Home</a></li>
+    <li>{{title}}</li>
+{% endblock breadcrumb %}
+
+
+{% block content %}
+    <div class="feedback main-grid-border">
+        <div class="container">
+            <h2 class="head">Feedback</h2>
+            <div class="feed-back">
+                <h3>Tell us what you think of us</h3>
+                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                <div class="feed-back-form">
+                    {% include 'partials/_alert.html' %}
+                    <form method="POST" action="{% url 'pages:feedback' %}" novalidate>
+                    {% csrf_token %}
+                    <span>User Details</span><br>
+                        <span style="color:red">{{feed_back_form.first_name.errors.as_text}}</span>
+                        {{feed_back_form.first_name}}
+
+
+
+                        <span style="color:red">{{feed_back_form.last_name.errors.as_text}}</span>
+                        {{feed_back_form.last_name}}
+
+
+                        <span style="color:red">{{feed_back_form.email.errors.as_text}}</span>
+                        {{feed_back_form.email}}
+
+
+                        <span style="color:red">{{feed_back_form.phone_number.errors.as_text}}</span>
+                        {{feed_back_form.phone_number}}
+
+                        <span>Is there anything you would like to tell us?</span><br>
+                        <span style="color:red">{{feed_back_form.message.errors.as_text}}</span>
+                        {{feed_back_form.message}}
+
+
+                        <input type="submit" value="submit">
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

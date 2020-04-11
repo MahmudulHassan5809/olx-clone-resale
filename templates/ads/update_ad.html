@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+    {{title}}
+{% endblock title %}
+
+{% block breadcrumb %}
+    <li><a href="{% url 'products:home' %}">Home</a></li>
+    <li><a href="{% url 'accounts:change_password' %}">Change Password</a></li>
+    <li><a href="{% url 'accounts:my_products' %}">My Proudcts</a></li>
+    <li class="active">Edit Ad</li>
+{% endblock breadcrumb %}
+
+
+{% block content %}
+<div class="submit-ad main-grid-border">
+    {% include 'partials/_alert.html' %}
+    <h2 class="head">Edit {{object.title}} Ad</h2>
+
+    <div class="post-ad-form">
+        <form action="{% url 'products:update_product' object.slug %}" method="POST" novalidate>
+            {% csrf_token %}
+
+            <span class="errors" style="color:red;font-weight:blod">
+                {{form.title.errors.as_text}}
+            </span>
+            <label>{{form.title.label}}<span>*</span></label>
+            {{form.title}}
+            <div class="clearfix"></div>
+
+            <span class="errors" style="color:red;font-weight:blod">
+                {{form.price.errors.as_text}}
+            </span>
+            <label>{{form.price.label}}<span>*</span></label>
+            {{form.price}}
+            <div class="clearfix"></div>
+
+            <span class="errors" style="color:red;font-weight:blod">
+                {{form.description.errors.as_text}}
+            </span>
+            <label>{{form.description.label}} <span>*</span></label>
+            {{form.description}}
+            <div class="clearfix"></div>
+
+            <span class="errors" style="color:red;font-weight:blod">
+                {{form.brand.errors.as_text}}
+            </span>
+            <label>{{form.brand.label}}<span>*</span></label>
+            {{form.brand}}
+            <div class="clearfix"></div>
+
+            <span class="errors" style="color:red;font-weight:blod">
+                {{form.city.errors.as_text}}
+            </span>
+            <label>{{form.city.label}}<span>*</span></label>
+            {{form.city}}
+            <div class="clearfix"></div>
+
+            <span class="errors" style="color:red;font-weight:blod">
+                {{form.area.errors.as_text}}
+            </span>
+            <label>{{form.area.label}}<span>*</span></label>
+            {{form.area}}
+            <div class="clearfix"></div>
+
+             <br><br>
+
+            <p class="post-terms">By clicking <strong>update Button</strong> you accept our <a href="terms.html" target="_blank">Terms of Use </a> and <a href="privacy.html" target="_blank">Privacy Policy</a></p>
+                    <input type="submit" value="Update">
+                    <div class="clearfix"></div>
+        </form>
+    </div>
+
+{% endblock content %}
