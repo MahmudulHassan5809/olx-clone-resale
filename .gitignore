@@ -6,7 +6,7 @@ __pycache__/
 .vscode
 db.sqlite3
 local_settings.py
-static
+/static
 
 
 # Environments

@@ -113,7 +113,7 @@ class PostAd(AictiveUserRequiredMixin, View):
             return render(request, 'ads/post_ad.html', context)
 
 
-class UpdateProduct(generic.edit.UpdateView):
+class UpdateProduct(AictiveUserRequiredMixin, generic.edit.UpdateView):
     model = Product
     fields = ['title', 'price', 'description', 'brand', 'city', 'area']
     template_name = 'ads/update_ad.html'

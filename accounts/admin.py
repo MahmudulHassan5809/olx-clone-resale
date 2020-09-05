@@ -11,7 +11,7 @@ class ProfileAdmin(admin.ModelAdmin):
                     "phone_number", "city", "user_email", "profile_pic", "active"]
     search_fields = ('user__username', 'phone_number',)
     list_filter = ['phone_number', 'user__email']
-    list_editable = ['active','email_confirmed']
+    list_editable = ['active', 'email_confirmed']
     list_per_page = 20
 
     def profile_name(self, obj):
